@@ -1,7 +1,7 @@
 from room import Room
 from player import Player
 from world import World
-
+from util import Stack
 import random
 from ast import literal_eval
 
@@ -30,6 +30,43 @@ player = Player(world.starting_room)
 traversal_path = []
 
 
+pathStack = Stack()
+
+visited = set()
+
+totalRooms =len(world.rooms)
+
+
+while len(visited) < totalRooms:  # while loop will go until visited length equals  rooms
+
+    exits = player.current_room.get_exits()
+  
+    directionList = [] #x from x in  exits will go in here 
+
+    for x in exits:
+        if  player.current_room.get_room_in_direction(x) not in visited and x:  # x is not none, if exit exists and we haven't visited
+            directionList.append(x)       
+    visited.add(player.current_room) # 0,1
+
+    if directionList:  # if pathList not empty
+        moveIndex = random.choice(directionList) # this will choose random number  if 0 - 3  n, s, e, w  length dependent 
+        pathStack.push(moveIndex)
+        player.travel(moveIndex) #1
+        traversal_path.append(moveIndex) # [1,2,]
+     
+    else:
+        end = pathStack.pop()
+        if end == 'n':
+            end = 's'
+        elif end == 's':
+            end = 'n'
+        elif end == 'e':
+            end = 'w'
+        elif end == 'w':
+            end = 'e'
+        player.travel(end)
+        traversal_path.append(end)
+
 
 # TRAVERSAL TEST - DO NOT MODIFY
 visited_rooms = set()
@@ -47,16 +84,15 @@ else:
     print(f"{len(room_graph) - len(visited_rooms)} unvisited rooms")
 
 
-
 #######
 # UNCOMMENT TO WALK AROUND
 #######
-player.current_room.print_room_description(player)
-while True:
-    cmds = input("-> ").lower().split(" ")
-    if cmds[0] in ["n", "s", "e", "w"]:
-        player.travel(cmds[0], True)
-    elif cmds[0] == "q":
-        break
-    else:
-        print("I did not understand that command.")
+# player.current_room.print_room_description(player)
+# while True:
+#     cmds = input("-> ").lower().split(" ")
+#     if cmds[0] in ["n", "s", "e", "w"]:
+#         player.travel(cmds[0], True)
+#     elif cmds[0] == "q":
+#         break
+#     else:
+#         print("I did not understand that command.")
