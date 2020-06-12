@@ -9,8 +9,6 @@ from ast import literal_eval
 world = World()
 
 
-
-
 # You may uncomment the smaller graphs for development and testing purposes.
 # map_file = "maps/test_line.txt"
 # map_file = "maps/test_cross.txt"
@@ -46,7 +44,7 @@ while len(visited) < totalRooms:  # while loop will go until visited length equa
     path = []
 
     for x in exits:
-        if  player.current_room.get_room_in_direction(x) not in visited and x:  #if exit exists and we haven't visited
+        if  player.current_room.get_room_in_direction(x) not in visited and x:  # x is not none, if exit exists and we haven't visited
             
             path.append(x)
             
@@ -71,15 +69,6 @@ while len(visited) < totalRooms:  # while loop will go until visited length equa
             end = 'e'
         player.travel(end)
         traversal_path.append(end)
-
-    
-
-
-
-
-
-
-
 
 
 # TRAVERSAL TEST - DO NOT MODIFY
