@@ -45,10 +45,7 @@ while len(visited) < totalRooms:  # while loop will go until visited length equa
 
     for x in exits:
         if  player.current_room.get_room_in_direction(x) not in visited and x:  # x is not none, if exit exists and we haven't visited
-            
-            path.append(x)
-            
-
+            path.append(x)       
     visited.add(player.current_room) # 0,1
 
     if len(path) > 0:
@@ -85,7 +82,6 @@ if len(visited_rooms) == len(room_graph):
 else:
     print("TESTS FAILED: INCOMPLETE TRAVERSAL")
     print(f"{len(room_graph) - len(visited_rooms)} unvisited rooms")
-
 
 
 #######
