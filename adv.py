@@ -41,7 +41,7 @@ while len(visited) < totalRooms:  # while loop will go until visited length equa
 
     exits = player.current_room.get_exits()
   
-    directionList = []
+    directionList = [] #x from x in  exits will go in here 
 
     for x in exits:
         if  player.current_room.get_room_in_direction(x) not in visited and x:  # x is not none, if exit exists and we haven't visited
