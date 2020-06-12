@@ -41,18 +41,18 @@ while len(visited) < totalRooms:  # while loop will go until visited length equa
 
     exits = player.current_room.get_exits()
   
-    path = []
+    directionList = []
 
     for x in exits:
         if  player.current_room.get_room_in_direction(x) not in visited and x:  # x is not none, if exit exists and we haven't visited
-            path.append(x)       
+            directionList.append(x)       
     visited.add(player.current_room) # 0,1
 
-    if len(path) > 0:
-        moveIndex = random.randint(0, len(path) - 1) # this will choose random number  if 0 - 3  n, s, e, w  length dependent 
-        pathStack.push(path[moveIndex])
-        player.travel(path[moveIndex]) #1
-        traversal_path.append(path[moveIndex]) # [1,2,]
+    if directionList:  # if pathList not empty
+        moveIndex = random.randint(0, len(directionList) - 1) # this will choose random number  if 0 - 3  n, s, e, w  length dependent 
+        pathStack.push(directionList[moveIndex])
+        player.travel(directionList[moveIndex]) #1
+        traversal_path.append(directionList[moveIndex]) # [1,2,]
      
     else:
         end = pathStack.pop()
